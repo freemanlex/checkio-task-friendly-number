@@ -93,9 +93,8 @@ friendly_number(255000000000, powers=['', 'k', 'M']) == '255000M'
 
 </p>
 <p>
-    <strong>Precondition:</strong> 1 < base &le; 10<sup>32</sup><br>
-    -10<sup>32</sup> < number &le; 10<sup>32</sup><br>
+    <strong>Precondition:</strong> 1 &lt; base &le; 10<sup>32</sup><br>
+    -10<sup>32</sup> &lt; number &le; 10<sup>32</sup><br>
     0 &le; decimals &le; 15<br>
-    0 < |powers| &le; 32<br>
-    &forall; p ∈ powers : p is a string<br>
+    0 &lt; len(powers) &le; 32<br>
 </p>
