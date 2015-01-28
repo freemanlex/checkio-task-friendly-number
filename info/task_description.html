@@ -6,7 +6,7 @@
     You should write a function for converting a <strong>number</strong> to string using several rules.
     First of all, you will need to cut the number with a given base (<strong>base</strong> argument; default 1000).
     The value is a float number with decimal after the point (<strong>decimals</strong> argument; default 0).
-    For the value, use the rounding down rule (5.6⇒5, -5.6⇒-5) if the decimal = 0,
+    For the value, use the rounding towards zero rule (5.6⇒5, -5.6⇒-5) if the decimal = 0,
     otherwise use the standard rounding procedure.
     If the number of decimals is greater than the current number of digits after dot, trail value with zeroes.
     The number should be a value with letters designating the power.
@@ -48,7 +48,7 @@
     </li>
     <li>
         n=-150, base=100, powers=['', 'd', 'D']<br>
-        result: '-1d', the negative number and rounding down.
+        result: '-1d', the negative number and rounding towards zero.
     </li>
     <li>
         n=-155, base=100, decimals=1, powers=['', 'd', 'D']<br>
