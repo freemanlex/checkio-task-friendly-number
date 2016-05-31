@@ -1,0 +1,106 @@
+<p>
+    L'aspect des nombres longs peut être amélioré, alors écrivons un code pour le réaliser ! 
+</p>
+
+<p>
+    Il vous faut écrire une fonction pour convertir un <strong>nombre</strong> en chaîne de caractères,
+    selon des règles expliquées ci-dessous.<br>
+    Tout d'abord, il faudra écourter ce nombre selon une certaine base (argument <strong>base</strong>; valeur par défaut : 1000).<br>
+    La valeur est un nombre "float", avec des décimales après le point (argument <strong>decimals</strong>; valeur par défaut : 0).<br>
+    Pour la valeur, utiliser la troncature si decimals = 0 (5.6 ==> 5, -5.6 ==> -5) ;
+    sinon, procéder à un arrondi standard.<br>
+    Si le nombre de décimales est supérieur au nombre de chiffres après le point, compléter par des 0 à la fin.<br>
+    Le nombre sera exprimé avec une lettre désignant la puissance ("power") accolée à la valeur.
+    Une liste des désignations pour le "power" sera fournie (argument <strong>powers</strong>; 
+    valeur par défaut : ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']).<br>
+    S'il n'y a pas suffisamment de "power", utilisez le maximum.<br>
+    Si l'on vous donne une unité, un suffixe (argument <strong>suffix</strong>; valeur par défaut ‘’), il faut l'ajouter à la fin.<br>
+    Pour finir, zero est toujours zero, sans "power", mais avec un suffixe.
+</p>
+
+<p>
+    Etudions quelques exemples, pour éclaircir le descriptif :
+</p>
+
+<ul>
+    <li>
+        n=102<br>
+        result: "102", la base prend la valeur par défaut 1000 et 102 est plus petit que cette base.
+    </li>
+    <li>
+        n=10240<br>
+        result: "10k", la base prend la valeur par défaut 1000, et arrondi inférieur.
+    </li>
+    <li>
+        n=12341234, decimals=1<br>
+        result: "12.3M", un chiffre après la virgule.
+    </li>
+    <li>
+        n=12000000, decimals=3<br>
+        result: "12.000M", zéros de queue pour compléter.
+    </li>
+    <li>
+        n=12461, decimals=1<br>
+        result: "12.5k", arrondi standard.
+    </li>
+    <li>
+        n=1024000000, base=1024, suffix='iB'<br>
+        result: '976MiB',  base spécifique et suffixe.
+    </li>
+    <li>
+        n=-150, base=100, powers=['', 'd', 'D']<br>
+        result: '-1d', valeur négative et troncature.
+    </li>
+    <li>
+        n=-155, base=100, decimals=1, powers=['', 'd', 'D']<br>
+        result: '-1.6d', valeur négative et arrondi standard.
+    </li>
+    <li>
+        n=255000000000, powers=['', 'k', 'M']<br>
+        result: '255000M', il n'y a pas assez de "powers".
+    </li>
+
+</ul>
+
+<p>
+    <strong>Input: </strong> Un nombre, comme entier.<br>
+    L'argument "base" comme entier, valeur par défaut 1000.<br>
+    L'argument "decimals" comme entier, valeur par défaut 0.<br>
+    L'argument "powers" comme liste de chaîne de caractères, valeur par défaut ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'].<br>
+</p>
+
+<p>
+    <strong>Output: </strong> Le nombre converti, comme chaîne de caractères.
+</p>
+
+<div class="for_info_only">
+    <p>
+        <strong>Exemple:</strong>
+    </p>
+    <pre class="brush: python">
+friendly_number(102) == '102'
+friendly_number(10240) == '10k'
+friendly_number(12341234, decimals=1) == '12.3M'
+friendly_number(12000000, decimals=3) == '12.000M'
+friendly_number(12461, decimals=1) == '12.5k'
+friendly_number(1024000000, base=1024, suffix='iB') == '976MiB'
+friendly_number(-150, base=100, powers=['', 'd', 'D']) == '-1d'
+friendly_number(-155, base=100, decimals=1, powers=['', 'd', 'D']) == '-1.6d'
+friendly_number(255000000000, powers=['', 'k', 'M']) == '255000M'
+    </pre>
+</div>
+
+
+<p>
+    <strong>Application:</strong> 
+    En sciences, nous manipulons des nombres de grandeurs variées.   
+    Il nous faut parfois en simplifier l'écriture, pour en faciliter la lecture (connaître simplement l'ordre de grandeur, 
+    l'exprimer dans l'unité adaptée).
+    Quand on manipule des gigabytes, on n'a parfois pas besoin de connaître le nombre exact de bytes, ou de kilobytes.
+</p>
+<p>
+    <strong>Préconditions:</strong> 1 &lt; base &le; 10<sup>32</sup><br>
+    -10<sup>32</sup> &lt; number &le; 10<sup>32</sup><br>
+    0 &le; decimals &le; 15<br>
+    0 &lt; len(powers) &le; 32<br>
+</p>
