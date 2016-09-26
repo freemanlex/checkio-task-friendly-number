@@ -29,6 +29,7 @@ checkio.referee.cover_codes
 from checkio.signals import ON_CONNECT
 from checkio import api
 from checkio.referees.io import CheckiOReferee
+from checkio.referees import cover_codes
 
 from tests import TESTS
 
@@ -46,7 +47,11 @@ api.add_listener(
         tests=TESTS,
         cover_code={
             'python-27': cover_both,  # or None
-            'python-3': cover_both
+            'python-3': cover_both,
+            'js-node': cover_codes.js_unwrap_args
         },
-        function_name='friendly_number'
+        function_name={
+            "python": "friendly_number",
+            "js": "friendlyNumber"
+        }
     ).on_ready)
