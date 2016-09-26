@@ -16,7 +16,7 @@ function friendlyNumber(number, options){
     if (!options.powers) {
         options.powers = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
     }
-    return str(number);
+    return String(number);
 }
 
 var assert = require('assert');

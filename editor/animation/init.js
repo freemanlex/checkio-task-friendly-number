@@ -1,5 +1,5 @@
-requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
-    function (extIO, $, TableComponent) {
+requirejs(['ext_editor_1', 'ext_editor_io', 'jquery_190', 'raphael_210'],
+    function (ext, extIO, $, TableComponent) {
         var io = new extIO({
             functions: {
                 js: 'friendlyNumber',
