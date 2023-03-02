@@ -24,90 +24,74 @@
 <p>
     Etudions quelques exemples, pour éclaircir le descriptif :
 </p>
-
-<ul>
-    <li>
-        n=102<br>
-        result: "102", la base prend la valeur par défaut 1000 et 102 est plus petit que cette base.
-    </li>
-    <li>
-        n=10240<br>
-        result: "10k", la base prend la valeur par défaut 1000, et arrondi inférieur.
-    </li>
-    <li>
-        n=12341234, decimals=1<br>
-        result: "12.3M", un chiffre après la virgule.
-    </li>
-    <li>
-        n=12000000, decimals=3<br>
-        result: "12.000M", zéros de queue pour compléter.
-    </li>
-    <li>
-        n=12461, decimals=1<br>
-        result: "12.5k", arrondi standard.
-    </li>
-    <li>
-        n=1024000000, base=1024, suffix='iB'<br>
-        result: '976MiB',  base spécifique et suffixe.
-    </li>
-    <li>
-        n=-150, base=100, powers=['', 'd', 'D']<br>
-        result: '-1d', valeur négative et troncature.
-    </li>
-    <li>
-        n=-155, base=100, decimals=1, powers=['', 'd', 'D']<br>
-        result: '-1.6d', valeur négative et arrondi standard.
-    </li>
-    <li>
-        n=255000000000, powers=['', 'k', 'M']<br>
-        result: '255000M', il n'y a pas assez de "powers".
-    </li>
-
-</ul>
+<table>
+    <tr>
+        <th>Number</th><th>Result</th><th>Explanation</th>
+    </tr>
+    <tr>
+        <td>102</td><td>"102"</td><td>la base prend la valeur par défaut 1000 et 102 est plus petit que cette base</td>
+    </tr>
+    <tr>
+        <td>10240</td><td>"10k"</td><td>la base prend la valeur par défaut 1000, et arrondi inférieur</td>
+    </tr>
+    <tr>
+        <td>12341234, decimals=1</td><td>"12.3M"</td><td>un chiffre après la virgule</td>
+    </tr>
+    <tr>
+        <td>12000000, decimals=3</td><td>"12.000M"</td><td>zéros de queue pour compléter</td>
+    </tr>
+    <tr>
+        <td>12461, decimals=1</td><td>"12.5k"</td><td>arrondi standard</td>
+    </tr>
+    <tr>
+        <td>1024000000, base=1024, suffix="iB"</td><td>"976MiB"</td><td>base spécifique et suffixe</td>
+    </tr>
+    <tr>
+        <td>-150, base=100, powers=["", "d", "D"]</td><td>"-1d"</td><td>valeur négative et troncature</td>
+    </tr>
+    <tr>
+        <td>-155, base=100, decimals=1, powers=["", "d", "D"]</td><td>"-1.6d"</td><td>valeur négative et arrondi standard</td>
+    </tr>
+    <tr>
+        <td>255000000000, powers=["", "k", "M"]</td><td>"255000M"</td><td>il n'y a pas assez de "powers</td>
+    </tr>
+</table>
 
 <p>
-    <strong>Input: </strong> Un nombre, comme entier.<br>
+    <strong>Input:</strong> Un nombre, comme entier.<br>
     L'argument "base" comme entier, valeur par défaut 1000.<br>
     L'argument "decimals" comme entier, valeur par défaut 0.<br>
     L'argument "powers" comme liste de chaîne de caractères, valeur par défaut ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'].<br>
 </p>
 
 <p>
-    <strong>Output: </strong> Le nombre converti, comme chaîne de caractères.
+    <strong>Output:</strong> Le nombre converti, comme chaîne de caractères.
 </p>
 
 <div class="for_info_only">
     <p>
         <strong>Exemple:</strong>
     </p>
-    <pre class="brush: python">{% if interpreter.slug == "js-node" %}
-friendlyNumber(102) == '102'
-friendlyNumber(10240) == '10k'
-friendlyNumber(12341234, {decimals: 1}) == '12.3M'
-friendlyNumber(12000000, {decimals: 3}) == '12.000M'
-friendlyNumber(12461, {decimals: 1}) == '12.5k'
-friendlyNumber(1024000000, {base: 1024, suffix: 'iB'}) == '976MiB'
-{% else %}
-friendly_number(102) == '102'
-friendly_number(10240) == '10k'
-friendly_number(12341234, decimals=1) == '12.3M'
-friendly_number(12000000, decimals=3) == '12.000M'
-friendly_number(12461, decimals=1) == '12.5k'
-friendly_number(1024000000, base=1024, suffix='iB') == '976MiB'
-{% endif %}</pre>
+    <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 
 <p>
-    <strong>Application:</strong> 
-    En sciences, nous manipulons des nombres de grandeurs variées.   
+    <strong>Application:</strong>
+    <i>
+        En sciences, nous manipulons des nombres de grandeurs variées.   
     Il nous faut parfois en simplifier l'écriture, pour en faciliter la lecture (connaître simplement l'ordre de grandeur, 
     l'exprimer dans l'unité adaptée).
     Quand on manipule des gigabytes, on n'a parfois pas besoin de connaître le nombre exact de bytes, ou de kilobytes.
+    </i>
+    
 </p>
 <p>
-    <strong>Préconditions:</strong> 1 &lt; base &le; 10<sup>32</sup><br>
-    -10<sup>32</sup> &lt; number &le; 10<sup>32</sup><br>
-    0 &le; decimals &le; 15<br>
-    0 &lt; len(powers) &le; 32<br>
+    <strong>Préconditions:</strong>   
+    <ul>
+        <li><i>1 &lt; base &le; 10<sup>32</sup></i></li>
+        <li><i>-10<sup>32</sup> &lt; number &le; 10<sup>32</sup></i></li>
+        <li><i>0 &le; decimals &le; 15</i></li>
+        <li><i>0 &lt; len(powers) &le; 32</i></li>
+    </ul>
 </p>
