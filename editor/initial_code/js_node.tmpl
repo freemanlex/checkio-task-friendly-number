@@ -3,28 +3,14 @@
 
 {% block start %}
 function friendlyNumber(number: number, options: Object): string {
-    if (!options) {
-        options = {};
-    }
-    if (!options.base) {
-        options.base = 1000;
-    }
-    if (!options.decimals) {
-        options.decimals = 0;
-    }
-    if (!options.suffix) {
-        options.suffix = '';
-    }
-    if (!options.powers) {
-        options.powers = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
-    }
+    // your code here
     return "";
 }
 {% endblock start %}
 
 {% block example %}
 console.log('Example:');
-console.log(friendlyNumber(102, {}));
+console.log(JSON.stringify(friendlyNumber(102, {})));
 {% endblock %}
 
 // These "asserts" are used for self-checking
