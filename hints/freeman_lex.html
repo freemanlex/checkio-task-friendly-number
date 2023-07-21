@@ -5,7 +5,7 @@
     </div>
     <div class="answer">
         <p>
-            Catch an idea 💡! 
+            Catch an idea 💡! To define, till what power the given <b class="code">number</b> may be divided by <b class="code">base</b> to remain more or equal 1. Round to float or integer depending on the <b class="code">decimals</b> present. Convert into string and add trailing zeros, <b class="code">power</b> and <b class="code">suffix</b>.
         </p>
     </div>
 </div>
@@ -15,62 +15,74 @@
     </div>
     <div class="answer">
         <p>
-            
+            To "extract" values from <b class="code">options</b> and assign them to the variables with respective default values. Since <b class="code">options</b> is a dictionary, use <a target="_blank" href="https://www.w3schools.com/python/ref_dictionary_get.asp">dict.get()</a> method with proper "keys" and default values.
         </p>
         <pre class="brush: python">
-
+b = options.get("base", 1000)
+d = options.get("decimals", 0)
+p = options.get("powers", ('', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'))
+s = options.get("suffix", "")
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        
+        What to do next?
     </div>
     <div class="answer">
         <p>
-            
+            To find out the power of <b class="code">base</b>, in which the given <b class="code">number</b> is, you need to start from zero value and increment it while it's enough letters in the <b class="code">powers</b> and <b class="code">base</b> in current power still less then or equal absolute value of <b class="code">number</b>.
         </p>
         <pre class="brush: python">
-
+e = 0
+while e + 1 < len(p) and abs(number) >= b**(e + 1):
+    e += 1
+        </pre>
+        <p>
+            When you find the proper power, you need to cut (divide) <b class="code">number</b> by the <b class="code">base</b> in this power <b class="code">e</b>. 
+        </p>
+        <pre class="brush: python">
+number /= b**e
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        
+        How to handle decimals now?
     </div>
     <div class="answer">
         <p>
-            
+            If <b class="code">decimals</b> is given, make an ordinary rounding with <a target="_blank" href="https://www.w3schools.com/python/ref_func_round.asp">round()</a> function, otherwise convert into integer with <a target="_blank" href="https://www.w3schools.com/python/ref_func_int.asp">int()</a> function. Convert the result into string.
         </p>
         <pre class="brush: python">
-
+number = str(round(number, d) if d else int(number))
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        
+        Help me to proceed.
     </div>
     <div class="answer">
         <p>
-            
+            Now it's time for trailing zeros. If <b class="code">decimals</b> is given and bigger than the actual number of digit after dot, add a necessary number of zeros. Find the index of dot in the <b class="code">number</b>, a number if digits after it and calculate the necessary number of zeros to add.
         </p>
         <pre class="brush: python">
-
+if d:
+    number += "0" * (d - (len(number) - number.index(".") - 1))
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        
+        How to finish the code?
     </div>
     <div class="answer">
         <p>
-            
+            You've found a proper power <b class="code">e</b> above and it's actually an index of needed power in <b class="code">powers</b>. So add this power and suffix.
         </p>
         <pre class="brush: python">
-
+number += p[e] + s
         </pre>
     </div>
 </div>
@@ -80,37 +92,31 @@
     </div>
     <div class="answer">
         <p>
-            You just need to join all previous hints and wrap your code into function expression. Using type hints for input and output data are highly recommended.
+            You just need to join all previous hints, return the <b class="code">number</b> and wrap your code into function expression. Using type hints for input and output data are highly recommended.
         </p>
         <p>Here is the whole solution:</p>
         <div class="spoiler">
         <pre class="brush: python">
+def friendly_number(number: int, options: dict) -> str:
 
-        </pre>
-        </div>
-    </div>
-</div>
-<div class="question-answer">
-    <div class="question">
-        Show me more solutions!<br />
-        'Cause I wanna be a real 🥇 Python Ninnjaa!
-    </div>
-    <div class="answer">
-        <p>Sure, grab it!</p>
-        <p>
-            
-        </p>
-        <div class="spoiler">
-        <pre class="brush: python">
+    b = options.get("base", 1000)
+    d = options.get("decimals", 0)
+    p = options.get("powers", ('', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'))
+    s = options.get("suffix", "")
 
-        </pre>
-        </div>
-        <p>
-            
-        </p>
-        <div class="spoiler">
-        <pre class="brush: python">
+    e = 0
+    while e + 1 < len(p) and abs(number) >= b**(e + 1):
+        e += 1
+    number /= b**e
+    
+    number = str(round(number, d) if d else int(number))
 
+    if d:
+        number += "0" * (d - (len(number) - number.index(".") - 1))
+    
+    number += p[e] + s
+
+    return number
         </pre>
         </div>
         <p>Click <b>Best Solutions</b> at mission menu and see a lot of other interesting solutions!</p>
